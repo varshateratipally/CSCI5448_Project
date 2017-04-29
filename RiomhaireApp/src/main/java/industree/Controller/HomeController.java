@@ -187,7 +187,7 @@ public class HomeController {
 		
 		
 		initializeVariables();
-		model.addAttribute("alertMessage", "Employee Created successfully;");
+		model.addAttribute("alertMessage", "Employee Created Successfully.");
 		model.addAttribute("employee", employee);
 		model.addAttribute("notifications", notifications);
 		model.addAttribute("employeeLeavesList", employeeLeaves);
@@ -203,7 +203,7 @@ public class HomeController {
 		dbConnection.updateUser(user);
 		
 		initializeVariables();
-		model.addAttribute("alertMessage", "Password Updated Successfully!");
+		model.addAttribute("alertMessage", "Password Updated Successfully.");
 		model.addAttribute("employee", employee);
 		model.addAttribute("notifications", notifications);
 		model.addAttribute("employeeLeavesList", employeeLeaves);
@@ -221,7 +221,7 @@ public class HomeController {
 		
 		
 		initializeVariables();
-		model.addAttribute("alertMessage", "Details successfully saved!");
+		model.addAttribute("alertMessage", "Details Saved Successfully.");
 		model.addAttribute("employee", employee);
 		model.addAttribute("notifications", notifications);
 		model.addAttribute("employeeLeavesList", employeeLeaves);
@@ -242,7 +242,7 @@ public class HomeController {
 		}
 		if(searchResults.size()==0)
 		{
-			model.addAttribute("alertMessage", "No results!");
+			model.addAttribute("alertMessage", "No Results.");
 		}
 		model.addAttribute("searchResults", searchResults);
 		
