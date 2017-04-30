@@ -58,7 +58,7 @@ padding-left: 15px;
              <span style="color: white"> Stock </span>
               </div>
               <div class="col-xs-2" id="p2">
-              <img src= "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTZ7oJXp-lUAY0MP9ZdXkurA8BaOXJdYVxA4BHlsc1AV6uiWBgNeg" 
+              <img src= "<c:url value="/images/Picture1.png"/>"
                width=100px height=100px/>
                <br/>
                <br/>
@@ -73,7 +73,7 @@ padding-left: 15px;
                <textarea rows="1" style="width: 100px;" readonly> ${electronicsStatus.stock}</textarea>
               </div>
               <div class="col-xs-2" id="p3">
-				<img src= "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTZ7oJXp-lUAY0MP9ZdXkurA8BaOXJdYVxA4BHlsc1AV6uiWBgNeg"
+				<img src= "<c:url value="/images/Picture2.png"/>"
 				width=100px height=100px
 				/>
 				<br/>
@@ -90,7 +90,7 @@ padding-left: 15px;
                
 			  </div>
               <div class="col-xs-2" id="p4">
-              <img src= "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTZ7oJXp-lUAY0MP9ZdXkurA8BaOXJdYVxA4BHlsc1AV6uiWBgNeg"
+              <img src= "<c:url value="/images/Picture3.png"/>"
               width=100px height=100px
               />
               <br/>
@@ -107,7 +107,7 @@ padding-left: 15px;
                
               </div>
               <div class="col-xs-2" id="p5">
-              <img src= "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTZ7oJXp-lUAY0MP9ZdXkurA8BaOXJdYVxA4BHlsc1AV6uiWBgNeg"
+              <img src= "<c:url value="/images/Picture4.png"/>"
               width=100px height=100px
               />
               <br/>

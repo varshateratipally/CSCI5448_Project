@@ -19,19 +19,19 @@ public class EmployeeLeave {
 	private int employeeLeaveId;
 	
 	@Column(name = "startDate")
-	private Date startDate;
+	private String startDate;
 	
 	@Column(name = "employeeId")
 	private String employeeId;
 	
 	@Column(name = "endDate")
-	private Date endDate;
+	private String endDate;
 	
 	@Column(name = "appliedDate")
-	private Date appliedDate;
+	private String appliedDate;
 	
 	@Column(name = "approvedDate")
-	private Date approvedDate;
+	private String approvedDate;
 	
 	@Column(name = "leaveComment")
 	private String leaveComment;
@@ -50,35 +50,35 @@ public class EmployeeLeave {
 		this.employeeLeaveId = employeeLeaveId;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
-	public Date getAppliedDate() {
+	public String getAppliedDate() {
 		return appliedDate;
 	}
 
-	public void setAppliedDate(Date appliedDate) {
+	public void setAppliedDate(String appliedDate) {
 		this.appliedDate = appliedDate;
 	}
 
-	public Date getApprovedDate() {
+	public String getApprovedDate() {
 		return approvedDate;
 	}
 
-	public void setApprovedDate(Date approvedDate) {
+	public void setApprovedDate(String approvedDate) {
 		this.approvedDate = approvedDate;
 	}
 
@@ -111,16 +111,17 @@ public class EmployeeLeave {
 		}
 		if(this.leaveStatus.compareTo("APPROVED")==0)
 		{
-			this.approvedDate=Calendar.getInstance().getTime();
+			this.approvedDate=Calendar.getInstance().getTime().toString();
 		}
 	}
 
-	public EmployeeLeave(String startDate, String endDate, String leaveComment) throws ParseException
+	public EmployeeLeave(String employeeId,String startDate, String endDate, String leaveComment) throws ParseException
 	{
-		this.startDate = (Date)new SimpleDateFormat("mm/dd/yyyy").parse(startDate);
-		this.endDate = (Date)new SimpleDateFormat("mm/dd/yyyy").parse(endDate);
+		this.employeeId = employeeId;
+		this.startDate = new SimpleDateFormat("mm/dd/yyyy").parse(startDate).toString();
+		this.endDate = new SimpleDateFormat("mm/dd/yyyy").parse(endDate).toString();
 		this.leaveComment = leaveComment;
-		this.appliedDate = Calendar.getInstance().getTime();
+		this.appliedDate = Calendar.getInstance().getTime().toString();
 		this.leaveStatusId= ClaimStatus.APPLIED.getClaimStatusId();
 	
 	}

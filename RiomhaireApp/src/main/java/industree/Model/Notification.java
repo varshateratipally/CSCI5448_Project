@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Notification {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name ="notificationId")
 	private int notificationId;
 	
@@ -71,6 +71,13 @@ public class Notification {
 	{
 		Calendar calendar=Calendar.getInstance();
 		this.dateSent= calendar.getTime();
+	}
+	
+	public Notification(String employeeId, String message)
+	{
+		 this.employeeId = employeeId;
+		 this.dateSent = Calendar.getInstance().getTime();
+		 this.message = message;
 	}
 	
 }

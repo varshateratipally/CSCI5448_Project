@@ -15,7 +15,7 @@ public class EmployeeClaim {
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name = "employeeClaimId")
-		private int employeeClaimId;
+		private String employeeClaimId;
 		
 		@Column(name="claimItemType")
 		private String claimItemType;
@@ -27,13 +27,13 @@ public class EmployeeClaim {
 		private int amount;
 
 		@Column(name = "purchaseDate")
-		private Date purchaseDate;
+		private String purchaseDate;
 		
 		@Column(name = "appliedDate")
-		private Date appliedDate;
+		private String appliedDate;
 		
 		@Column(name = "approvedDate")
-		private Date approvedDate;
+		private String approvedDate;
 		
 		@Column(name="claimStatusId")
 		private int claimStatusId;
@@ -57,16 +57,16 @@ public class EmployeeClaim {
 			}
 			if(this.claimStatus.compareTo("APPROVED")==0)
 			{
-				this.approvedDate=Calendar.getInstance().getTime();
+				this.approvedDate=Calendar.getInstance().getTime().toString();
 			}
 			
 		}
 
-		public int getEmployeeClaimId() {
+		public String getEmployeeClaimId() {
 			return employeeClaimId;
 		}
 
-		public void setEmployeeClaimId(int employeeClaimId) {
+		public void setEmployeeClaimId(String employeeClaimId) {
 			this.employeeClaimId = employeeClaimId;
 		}
 
@@ -94,27 +94,27 @@ public class EmployeeClaim {
 			this.amount = amount;
 		}
 
-		public Date getPurchaseDate() {
+		public String getPurchaseDate() {
 			return purchaseDate;
 		}
 
-		public void setPurchaseDate(Date purchaseDate) {
+		public void setPurchaseDate(String purchaseDate) {
 			this.purchaseDate = purchaseDate;
 		}
 
-		public Date getAppliedDate() {
+		public String getAppliedDate() {
 			return appliedDate;
 		}
 
-		public void setAppliedDate(Date appliedDate) {
+		public void setAppliedDate(String appliedDate) {
 			this.appliedDate = appliedDate;
 		}
 
-		public Date getApprovedDate() {
+		public String getApprovedDate() {
 			return approvedDate;
 		}
 
-		public void setApprovedDate(Date approvedDate) {
+		public void setApprovedDate(String approvedDate) {
 			this.approvedDate = approvedDate;
 		}
 
@@ -139,18 +139,18 @@ public class EmployeeClaim {
 			this.claimComment = claimComment;
 		}
 
-		public EmployeeClaim(String claimItemName, String purchaseDate, int amount, String comment)
+		public EmployeeClaim(String employeeId, String claimItemName, String purchaseDate, int amount, String comment)
 		{	
-			
+			this.employeeId= employeeId;
 			this.claimItemType= claimItemName;
 			try {
-				this.purchaseDate = (Date)new SimpleDateFormat("mm/dd/yyyy").parse(purchaseDate);
+				this.purchaseDate = new SimpleDateFormat("mm/dd/yyyy").parse(purchaseDate).toString();
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			this.amount=amount;
-			this.appliedDate = Calendar.getInstance().getTime();
+			this.appliedDate = Calendar.getInstance().getTime().toString();
 			this.claimComment=comment;
 			this.claimStatusId=ClaimStatus.APPLIED.getClaimStatusId();
 		}

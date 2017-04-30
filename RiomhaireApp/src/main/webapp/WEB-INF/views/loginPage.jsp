@@ -23,7 +23,7 @@
     <span class="icon-bar"></span>
      <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand text-hide" href="http://disputebills.com" style="background: url(/RiomhaireApp/src/main/resources/porter.png) center / contain no-repeat; width:200px;">Text</a>
+    <a class="navbar-brand text-hide" href="http://disputebills.com"><img src="<c:url value="/images/Transparent4.png"/>"/></a>
   	</div>
 </div>
 </nav>

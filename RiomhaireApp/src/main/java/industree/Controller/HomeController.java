@@ -60,6 +60,11 @@ public class HomeController {
 	@RequestMapping(value="processCredentials", method = RequestMethod.POST)
 	public String processCredentials(@RequestParam("userName")String userName, @RequestParam("password")String password, Model model) {
 		
+		if(!userName.contains("@Riomhaire.edu"))
+		{
+			model.addAttribute("message", "username is invalid");
+			return "loginPage";
+		}
 		this.user = dbConnection.validateLoginUser(userName, password);
 		
 		if(user!=null)
@@ -100,7 +105,7 @@ public class HomeController {
 	public String saveEmployeeClaim(@RequestParam("itemName") String claimItemName, @RequestParam("purchaseDate") String purchaseDate,
 			@RequestParam("amount") int amount, @RequestParam("comment") String memo, Model model) throws ParseException
 	{
-		EmployeeClaim employeeClaim = new EmployeeClaim(claimItemName, purchaseDate, (int)amount, memo);
+		EmployeeClaim employeeClaim = new EmployeeClaim(employee.getEmployeeId(),claimItemName, purchaseDate, (int)amount, memo);
 		
 		dbConnection.saveAppliedClaim(employeeClaim);
 		
@@ -110,7 +115,17 @@ public class HomeController {
 		model.addAttribute("notifications", notifications);
 		model.addAttribute("employeeLeavesList", employeeLeaves);
 		model.addAttribute("employeeClaimsList", employeeClaims);
-		
+		for(WorkingLineStatus worklineStatus:workingLineStatus)
+		{
+			if(worklineStatus.getMachineType().compareTo("Electronics")==0){
+			model.addAttribute("electronicsStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Screen")==0){
+			model.addAttribute("screenStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Casing")==0){
+			model.addAttribute("casingStatus",worklineStatus );}
+			else {
+			model.addAttribute("batteryStatus",worklineStatus );}
+		}
 		
 		return "userHomePage"; 
 	}
@@ -120,7 +135,7 @@ public class HomeController {
 	public String saveLeave(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
 			@RequestParam("leaveComment") String memo, Model model) throws ParseException
 	{
-		EmployeeLeave employeeLeave = new EmployeeLeave(startDate, endDate, memo);
+		EmployeeLeave employeeLeave = new EmployeeLeave(employee.getEmployeeId(),startDate, endDate, memo);
 		
 		dbConnection.saveAppliedLeave(employeeLeave);
 		initializeVariables();
@@ -129,14 +144,25 @@ public class HomeController {
 		model.addAttribute("notifications", notifications);
 		model.addAttribute("employeeLeavesList", employeeLeaves);
 		model.addAttribute("employeeClaimsList", employeeClaims);
-		
+		for(WorkingLineStatus worklineStatus:workingLineStatus)
+		{
+			if(worklineStatus.getMachineType().compareTo("Electronics")==0){
+			model.addAttribute("electronicsStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Screen")==0){
+			model.addAttribute("screenStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Casing")==0){
+			model.addAttribute("casingStatus",worklineStatus );}
+			else {
+			model.addAttribute("batteryStatus",worklineStatus );}
+		}
 		
 		return "userHomePage"; 
 	}
 	
-	@RequestMapping(value="/approvalLeaves", method = RequestMethod.POST )
+	@RequestMapping(value="approvalLeaves", method = RequestMethod.POST )
 	public String ApprovalLeaves(@ModelAttribute("employeeLeavesList") EmployeeLeaves  employeeLeave, Model model)
 	{	
+		System.out.print("approval leaves");
 		if(!employeeLeave.getEmployeeLeaves().isEmpty())
 		{
 			dbConnection.saveApprovedLeaves(employeeLeave.getEmployeeLeaves());
@@ -147,17 +173,44 @@ public class HomeController {
 			model.addAttribute("notifications", notifications);
 			model.addAttribute("employeeLeavesList", employeeLeaves);
 			model.addAttribute("employeeClaimsList", employeeClaims);
-			
+			for(WorkingLineStatus worklineStatus:workingLineStatus)
+			{
+				if(worklineStatus.getMachineType().compareTo("Electronics")==0){
+				model.addAttribute("electronicsStatus",worklineStatus );}
+				else if(worklineStatus.getMachineType().compareTo("Screen")==0){
+				model.addAttribute("screenStatus",worklineStatus );}
+				else if(worklineStatus.getMachineType().compareTo("Casing")==0){
+				model.addAttribute("casingStatus",worklineStatus );}
+				else {
+				model.addAttribute("batteryStatus",worklineStatus );}
+			}
 			
 			return "userHomePage";
 		}
-		return "";
+		model.addAttribute("alertMessage","There ");
+		model.addAttribute("employee", employee);
+		model.addAttribute("notifications", notifications);
+		model.addAttribute("employeeLeavesList", employeeLeaves);
+		model.addAttribute("employeeClaimsList", employeeClaims);
+		for(WorkingLineStatus worklineStatus:workingLineStatus)
+		{
+			if(worklineStatus.getMachineType().compareTo("Electronics")==0){
+			model.addAttribute("electronicsStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Screen")==0){
+			model.addAttribute("screenStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Casing")==0){
+			model.addAttribute("casingStatus",worklineStatus );}
+			else {
+			model.addAttribute("batteryStatus",worklineStatus );}
+		}
 		
+		return "userHomePage";
 	}
 	
-	@RequestMapping(value="/approvalClaims", method = RequestMethod.POST )
-	public String ApprovalLeaves(@ModelAttribute("employeeClaimsList") EmployeeClaims  employeeClaim, Model model)
+	@RequestMapping(value="approvalClaims", method = RequestMethod.POST )
+	public String ApprovalClaims(@ModelAttribute("employeeClaimsList") EmployeeClaims  employeeClaim, Model model)
 	{	
+		
 		if(!employeeClaim.getEmployeeClaims().isEmpty()){
 		
 			dbConnection.saveApprovedClaims(employeeClaim.getEmployeeClaims());
@@ -168,11 +221,39 @@ public class HomeController {
 			model.addAttribute("notifications", notifications);
 			model.addAttribute("employeeLeavesList", employeeLeaves);
 			model.addAttribute("employeeClaimsList", employeeClaims);
+			for(WorkingLineStatus worklineStatus:workingLineStatus)
+			{
+				if(worklineStatus.getMachineType().compareTo("Electronics")==0){
+				model.addAttribute("electronicsStatus",worklineStatus );}
+				else if(worklineStatus.getMachineType().compareTo("Screen")==0){
+				model.addAttribute("screenStatus",worklineStatus );}
+				else if(worklineStatus.getMachineType().compareTo("Casing")==0){
+				model.addAttribute("casingStatus",worklineStatus );}
+				else {
+				model.addAttribute("batteryStatus",worklineStatus );}
+			}
 			
 			
 			return "userHomePage";
 		}
-		return "";
+		model.addAttribute("alertMessage","No approved saved claims!");
+		model.addAttribute("employee", employee);
+		model.addAttribute("notifications", notifications);
+		model.addAttribute("employeeLeavesList", employeeLeaves);
+		model.addAttribute("employeeClaimsList", employeeClaims);
+		for(WorkingLineStatus worklineStatus:workingLineStatus)
+		{
+			if(worklineStatus.getMachineType().compareTo("Electronics")==0){
+			model.addAttribute("electronicsStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Screen")==0){
+			model.addAttribute("screenStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Casing")==0){
+			model.addAttribute("casingStatus",worklineStatus );}
+			else {
+			model.addAttribute("batteryStatus",worklineStatus );}
+		}
+		
+		return "userHomePage";
 	}
 	
 	@RequestMapping(value="/createEmployee", method = RequestMethod.POST )
@@ -192,6 +273,17 @@ public class HomeController {
 		model.addAttribute("notifications", notifications);
 		model.addAttribute("employeeLeavesList", employeeLeaves);
 		model.addAttribute("employeeClaimsList", employeeClaims);
+		for(WorkingLineStatus worklineStatus:workingLineStatus)
+		{
+			if(worklineStatus.getMachineType().compareTo("Electronics")==0){
+			model.addAttribute("electronicsStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Screen")==0){
+			model.addAttribute("screenStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Casing")==0){
+			model.addAttribute("casingStatus",worklineStatus );}
+			else {
+			model.addAttribute("batteryStatus",worklineStatus );}
+		}
 		
 		return "userHomePage";
 	}
@@ -208,6 +300,17 @@ public class HomeController {
 		model.addAttribute("notifications", notifications);
 		model.addAttribute("employeeLeavesList", employeeLeaves);
 		model.addAttribute("employeeClaimsList", employeeClaims);
+		for(WorkingLineStatus worklineStatus:workingLineStatus)
+		{
+			if(worklineStatus.getMachineType().compareTo("Electronics")==0){
+			model.addAttribute("electronicsStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Screen")==0){
+			model.addAttribute("screenStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Casing")==0){
+			model.addAttribute("casingStatus",worklineStatus );}
+			else {
+			model.addAttribute("batteryStatus",worklineStatus );}
+		}
 		
 		return "userHomePage";
 	}
@@ -226,6 +329,17 @@ public class HomeController {
 		model.addAttribute("notifications", notifications);
 		model.addAttribute("employeeLeavesList", employeeLeaves);
 		model.addAttribute("employeeClaimsList", employeeClaims);
+		for(WorkingLineStatus worklineStatus:workingLineStatus)
+		{
+			if(worklineStatus.getMachineType().compareTo("Electronics")==0){
+			model.addAttribute("electronicsStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Screen")==0){
+			model.addAttribute("screenStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Casing")==0){
+			model.addAttribute("casingStatus",worklineStatus );}
+			else {
+			model.addAttribute("batteryStatus",worklineStatus );}
+		}
 		
 		return "userHomePage";
 	}
@@ -263,6 +377,18 @@ public class HomeController {
 		model.addAttribute("notifications", notifications);
 		model.addAttribute("employeeLeavesList", employeeLeaves);
 		model.addAttribute("employeeClaimsList", employeeClaims);
+		for(WorkingLineStatus worklineStatus:workingLineStatus)
+		{
+			if(worklineStatus.getMachineType().compareTo("Electronics")==0){
+			model.addAttribute("electronicsStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Screen")==0){
+			model.addAttribute("screenStatus",worklineStatus );}
+			else if(worklineStatus.getMachineType().compareTo("Casing")==0){
+			model.addAttribute("casingStatus",worklineStatus );}
+			else {
+			model.addAttribute("batteryStatus",worklineStatus );}
+		}
+		
 		return "userHomePage";
 	}
 	

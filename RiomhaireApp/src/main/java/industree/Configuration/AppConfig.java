@@ -27,4 +27,10 @@ public class AppConfig extends WebMvcConfigurerAdapter
 	{
 		configurer.enable();
 	}
+	
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry)
+	{
+		registry.addResourceHandler("/images/**").addResourceLocations("file:///Users/varshateratipally/Documents/RiomhaireApp/src/main/webapp/WEB-INF/images/");
+	}
 }

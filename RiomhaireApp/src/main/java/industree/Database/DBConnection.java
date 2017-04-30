@@ -77,7 +77,7 @@ public class DBConnection implements IDBConnection {
 		}
 		for(Employee employee : employeeList)
 		{
-			query = session.createQuery("from EmployeeLeave where employeeId = :employeeId");
+			query = session.createQuery("from EmployeeLeave where employeeId = :employeeId and leaveStatusId = 1");
 			query.setParameter("employeeId", employee.getEmployeeId());
 			employeeLeavesList.addAll((List<EmployeeLeave>)query.list());
 		}
@@ -87,21 +87,26 @@ public class DBConnection implements IDBConnection {
 
 	@Override
 	public EmployeeClaims getEmployeeClaims(String managerId) {
+		EmployeeClaims employeeClaims = new EmployeeClaims();
+		List<EmployeeClaim> employeeClaimsList= new ArrayList<EmployeeClaim>();
 		Session session = beginSession();
-		String queried="from EmployeeClaim e where e.employeeId = :managerId";
+		String queried = "from Employee where managerId = :managerId";
+		
 		Query query = session.createQuery(queried);
 		query.setParameter("managerId", managerId);
-		List<EmployeeClaim> ls = query.list();
-		
-		if(ls == null || ls.isEmpty())
+		List<Employee> employeeList = query.list();
+		if(employeeList == null || employeeList.isEmpty())
 		{
 			return null;
 		}
-		session.close();
-		EmployeeClaims ee= new EmployeeClaims();
-		ee.setEmployeeClaims(ls);
-		
-		return ee;
+		for(Employee employee : employeeList)
+		{
+			query = session.createQuery("from EmployeeClaim where employeeId = :employeeId and claimStatusId = 1");
+			query.setParameter("employeeId", employee.getEmployeeId());
+			employeeClaimsList.addAll((List<EmployeeClaim>)query.list());
+		}
+		employeeClaims.setEmployeeClaims(employeeClaimsList);
+		return employeeClaims;
 	}
 
 	@Override
@@ -126,9 +131,13 @@ public class DBConnection implements IDBConnection {
 
 	@Override
 	public void saveAppliedLeave(EmployeeLeave employeeLeave) {
+		Notification notification = new Notification(employeeLeave.getEmployeeId(),
+				"Your leave for "+ employeeLeave.getStartDate()+ " to "+ employeeLeave.getEndDate()+
+				" has been applied on " + employeeLeave.getAppliedDate());
 		Session session =  beginSession();
 		session.save(employeeLeave);
 		session.beginTransaction().commit();
+		this.createNotification(notification);
 		
 	}
 
@@ -136,6 +145,10 @@ public class DBConnection implements IDBConnection {
 	public void saveAppliedClaim(EmployeeClaim employeeClaim) {
 		Session session =  beginSession();
 		session.save(employeeClaim);
+		Notification notification = new Notification(employeeClaim.getEmployeeId(),
+				"Your claim for "+ employeeClaim.getClaimItemType()+
+				" has been applied");
+		this.createNotification(notification);
 		session.beginTransaction().commit();
 	}
 
@@ -145,11 +158,15 @@ public class DBConnection implements IDBConnection {
 		Session session = beginSession();
 		for(EmployeeLeave employeeLeave : employeeLeaves)
 		{
+			
 			session.saveOrUpdate(employeeLeave);
+			Notification notification = new Notification(employeeLeave.getEmployeeId(),
+					"Your leave for "+ employeeLeave.getStartDate()+ " to "+ employeeLeave.getEndDate()+
+					" has been approved");
+			this.createNotification(notification);
 			
 		}
 		session.beginTransaction().commit();
-		
 	}
 
 	@Override
@@ -158,6 +175,10 @@ public class DBConnection implements IDBConnection {
 		for(EmployeeClaim employeeClaim : employeeClaims)
 		{
 			session.saveOrUpdate(employeeClaim);
+			Notification notification = new Notification(employeeClaim.getEmployeeId(),
+					"Your claim for "+ employeeClaim.getClaimItemType()+
+					" has been approved");
+			this.createNotification(notification);
 			
 		}
 		session.beginTransaction().commit();
@@ -190,10 +211,7 @@ public class DBConnection implements IDBConnection {
 			ids.add(user.getUserId());
 		}
 		Employee employee= new Employee();
-		System.out.println(ids);
-		System.out.println(department);
 		List<Employee> employees= this.getEmployeeFromUserIds(ids, department);
-		System.out.println("out of the method");
 		SearchResults searchResult;
 		String name="";
 		
@@ -297,6 +315,14 @@ public class DBConnection implements IDBConnection {
 		session.saveOrUpdate(employee);
 		session.beginTransaction().commit();
 		
+	}
+	
+	private void createNotification(Notification notification)
+	{
+		
+		Session session = beginSession();
+		session.save(notification);
+		session.beginTransaction().commit();
 	}
 	
 	
