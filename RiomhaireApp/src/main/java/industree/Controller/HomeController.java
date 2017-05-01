@@ -84,7 +84,7 @@ public class HomeController {
 		}
 		else
 		{
-			model.addAttribute("message", "Invalid UserName or Password. Please try again!");
+			model.addAttribute("message", "Invalid UserName or Password. Please Try Again.");
 			return "loginPage";
 		}
 	}
@@ -93,7 +93,7 @@ public class HomeController {
 	public ModelAndView forgotSendPassword(@RequestParam("emailAddress") String emailAddress, Model model) throws MessagingException{
 		
 		utility.sendMail(emailAddress);
-		return new ModelAndView("loginPage", "message", "An email link has been sent!");
+		return new ModelAndView("loginPage", "message", "You Have Been Emailed a Link to Reset Your Password");
 	}
 	
 	@RequestMapping(value="/ForgotPassword")
@@ -105,7 +105,7 @@ public class HomeController {
 	@GetMapping("/logout")
 	public ModelAndView logout(Model model)
 	{
-		return new ModelAndView("loginPage", "message", "You have been successfully logged out!");
+		return new ModelAndView("loginPage", "message", "You Have Been Logged Out");
 	}
 	
 	@RequestMapping(value="SaveClaim", method = RequestMethod.POST)
@@ -118,7 +118,7 @@ public class HomeController {
 		
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage","Successfully Applied Claim!");
+		model.addAttribute("alertMessage","Successfully Applied for Claim");
 		
 		
 		return "userHomePage"; 
@@ -134,7 +134,7 @@ public class HomeController {
 		dbConnection.saveAppliedLeave(employeeLeave);
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage","Successfully Applied Leave!");
+		model.addAttribute("alertMessage","Successfully Applied for Leave");
 		
 		
 		return "userHomePage"; 
@@ -150,14 +150,14 @@ public class HomeController {
 			
 			initializeVariables();
 			model = this.bindVariables(model);
-			model.addAttribute("alertMessage","Successfully saved leaves!");
+			model.addAttribute("alertMessage","Leave Status Updated");
 			
 			
 			return "userHomePage";
 		}
 		
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage","There ");
+		model.addAttribute("alertMessage","No Updates");
 		
 		
 		return "userHomePage";
@@ -173,14 +173,14 @@ public class HomeController {
 			
 			initializeVariables();
 			model = this.bindVariables(model);
-			model.addAttribute("alertMessage","Successfully saved claims!");
+			model.addAttribute("alertMessage","Claims Updated.");
 			
 			
 			
 			return "userHomePage";
 		}
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage","No approved saved claims!");
+		model.addAttribute("alertMessage","No Updates.");
 		
 		
 		return "userHomePage";
@@ -199,7 +199,7 @@ public class HomeController {
 		System.out.print("of the funtion");
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage", "Employee Created successfully;");
+		model.addAttribute("alertMessage", "Employee Created Successfully");
 		
 		
 		return "userHomePage";
@@ -217,7 +217,7 @@ public class HomeController {
 		}
 		if(searchResults.size()==0)
 		{
-			model.addAttribute("alertMessage", "No results!");
+			model.addAttribute("alertMessage", "No Results");
 		}
 		model.addAttribute("searchResults", searchResults);
 		
@@ -231,7 +231,7 @@ public class HomeController {
 		{
 			initializeVariables();
 			model = this.bindVariables(model);
-			model.addAttribute("alertMessage", "Password and Confirm passwords doesn't match!");
+			model.addAttribute("alertMessage", "Passwords Do Not Match");
 			
 			
 			return "userHomePage";
@@ -242,7 +242,7 @@ public class HomeController {
 		
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage", "Password Updated Successfully!");
+		model.addAttribute("alertMessage", "Password Updated Successfully");
 		
 		
 		return "userHomePage";
@@ -254,7 +254,7 @@ public class HomeController {
 		dbConnection.deleteClaim(employeeClaimId);
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage", "Claim Deleted Successfully!");
+		model.addAttribute("alertMessage", "Claim Deleted");
 		
 		return "userHomePage";
 	}
@@ -265,7 +265,7 @@ public class HomeController {
 		dbConnection.deleteLeave(employeeLeaveId);
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage", "Claim Deleted Successfully!");
+		model.addAttribute("alertMessage", "Claim Deleted");
 		
 		return "userHomePage";
 	}
@@ -280,7 +280,7 @@ public class HomeController {
 		
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage", "Details successfully saved!");
+		model.addAttribute("alertMessage", "Details Saved");
 		
 		
 		return "userHomePage";
@@ -311,7 +311,7 @@ public class HomeController {
 		dbConnection.deleteEmployee(employeeId);
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage", "Employee Deleted Successfully!");
+		model.addAttribute("alertMessage", "Employee Deleted");
 		
 		return "userHomePage";
 	}
@@ -335,7 +335,7 @@ public class HomeController {
 		dbConnection.updateUserRoleStatus(employeeId,userRoleStatus, userRoleStatusId);
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage", "Employee Role Changed Successfully!");
+		model.addAttribute("alertMessage", "Employee Role Modified");
 		
 		return "userHomePage";
 	}
@@ -347,7 +347,7 @@ public class HomeController {
 		
 		this.initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage", "Stock Requested!");
+		model.addAttribute("alertMessage", "Stock Requested");
 		
 		return "userHomePage";
 		
