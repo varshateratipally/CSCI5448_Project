@@ -1,7 +1,8 @@
 #CSCI-5448 Course Project
-Industree- Factory Management Platform
 
-Team Members: Nestor Lobo, Shreya Verma, Varsha Teratipally
+#Industree- Factory Management Platform
+
+##Team Members: Nestor Lobo, Shreya Verma, Varsha Teratipally
 
 A user-friendly platform aimed to aid in the management of day-to-day working in a factory. It enables a centralized management systems if tasks such as tracking machine stock levels, getting information of the machine-line status, requesting stock if faulty or running low, etc. It also provides a management system for the Human Resources department for creating employee and managing employee information and enabling employees to apply for leaves and claims through the Approval center, searching for employees and view machine line statuses of all lines. A database is maintained for storing employee information and inventory of stocks. The factory personnels can edit their personal information, view their machine line statuses, apply for leaves and claims and search for any fellow employee in the department. The admin has been given access rights to change user roles of any employee and even deactivate their profile from the system.
 
