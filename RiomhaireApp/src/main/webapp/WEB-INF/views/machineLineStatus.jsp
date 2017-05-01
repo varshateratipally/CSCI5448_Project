@@ -62,15 +62,15 @@ padding-left: 15px;
                width=100px height=100px/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${electronicsStatus.status}</textarea>
+               <textarea rows="1" id="electronicsStatustext" style="width: 100px;" readonly> ${electronicsStatus.status}</textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${electronicsStatus.startPosition}  -  ${electronicsStatus.startPosition} </textarea>
+               <textarea rows="1" id="electronicsStatusPosition" style="width: 100px;" readonly> ${electronicsStatus.startPosition}  -  ${electronicsStatus.startPosition} </textarea>
                 <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${electronicsStatus.stock}</textarea>
+               <textarea rows="1" id="electronicsStock" style="width: 100px;" readonly> ${electronicsStatus.stock}</textarea>
               </div>
               <div class="col-xs-2" id="p3">
 				<img src= "<c:url value="/images/Picture2.png"/>"
@@ -78,15 +78,15 @@ padding-left: 15px;
 				/>
 				<br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${screenStatus.status}</textarea>
+               <textarea rows="1" id="screenStatus" style="width: 100px;" readonly> ${screenStatus.status}</textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${screenStatus.startPosition}  -  ${screenStatus.startPosition} </textarea>
+               <textarea rows="1" id="screenStatusPosition" style="width: 100px;" readonly> ${screenStatus.startPosition}  -  ${screenStatus.startPosition} </textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${screenStatus.stock} </textarea>
+               <textarea rows="1" id="screenStatusStock" style="width: 100px;" readonly> ${screenStatus.stock} </textarea>
                
 			  </div>
               <div class="col-xs-2" id="p4">
@@ -95,15 +95,15 @@ padding-left: 15px;
               />
               <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${casingStatus.status} </textarea>
+               <textarea rows="1" id="casingStatus" style="width: 100px;" readonly> ${casingStatus.status} </textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${casingStatus.startPosition}  -  ${casingStatus.startPosition} </textarea>
+               <textarea rows="1" id="casingStatusPosition" style="width: 100px;" readonly> ${casingStatus.startPosition}  -  ${casingStatus.startPosition} </textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${casingStatus.stock}</textarea>
+               <textarea rows="1" id="casingStatusStock" style="width: 100px;" readonly> ${casingStatus.stock}</textarea>
                
               </div>
               <div class="col-xs-2" id="p5">
@@ -112,15 +112,15 @@ padding-left: 15px;
               />
               <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${batteryStatus.status}</textarea>
+               <textarea rows="1" id="batteryStatus" style="width: 100px;" readonly> ${batteryStatus.status}</textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${batteryStatus.startPosition}  -  ${batteryStatus.startPosition} </textarea>
+               <textarea rows="1" id="batteryStatusPosition" style="width: 100px;" readonly> ${batteryStatus.startPosition}  -  ${batteryStatus.startPosition} </textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${batteryStatus.stock}</textarea>
+               <textarea rows="1" id="batteryStatusStock" style="width: 100px;" readonly> ${batteryStatus.stock}</textarea>
                
               </div>
             <!-- //col-lg-12 -->
@@ -132,6 +132,15 @@ padding-left: 15px;
    <br/>
 
 </div>
+<script type="text/javascript">
+setInterval(function page_Reload()
+{
+	var x = document.getElementById("myline").getElementsByTagName("electronicsStatustext");
+	alert("stock low");
+	location.reload();
+},1000*60*10);
 
+
+</script>
 </body>
 </html>

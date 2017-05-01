@@ -411,7 +411,7 @@ public class DBConnection implements IDBConnection {
 	public void updateUserRoleStatus(String employeeId, String designation,int userRoleStatusId)
 	{
 		int userId  = this.getUserId(employeeId);
-		if(userId>0){
+		if(userId > 0){
 		Session session = beginSession();
 		String queried = "Update Employee set designation= :designation where employeeId = :employeeId";
 		Query query = session.createQuery(queried);
@@ -437,9 +437,9 @@ public class DBConnection implements IDBConnection {
 		String queried = "from Employee e where e.employeeId = :employeeId";
 		Query query = session.createQuery(queried);
 		query.setParameter("employeeId", employeeId);
-		List<User> user =  query.list();
+		List<Employee> user =  query.list();
 		int userId=0;
-		if(user != null)
+		if(user != null && user.size()>0)
 		{
 			userId  = user.get(0).getUserId();
 		}
