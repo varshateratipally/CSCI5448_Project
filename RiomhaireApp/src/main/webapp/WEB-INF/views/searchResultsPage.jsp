@@ -78,6 +78,7 @@
 <th> Contact Number</th>
 <th> Date Of Joining</th>
 <th> Designation </th>
+<th> Employee Id</th>
 </c:if>
 </tr>
 <c:forEach items="${searchResults}" var="searchResult">
@@ -89,6 +90,8 @@
 <td><c:out value = "${searchResult.contactNumber}"/></td>
 <td><c:out value = "${searchResult.dateOfJoining}"/></td>
 <td><c:out value = "${searchResult.designation}"/></td>
+<td><c:out value = "${searchResult.designation}"/></td>
+<td><c:out value = "${searchResult.employeeId}"/></td>
 </c:if>
 </tr>
 </c:forEach>

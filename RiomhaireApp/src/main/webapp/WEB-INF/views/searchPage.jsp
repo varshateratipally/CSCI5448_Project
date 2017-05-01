@@ -10,7 +10,7 @@
 <body>
 			<div class="row">
                     		<div style="height:30px;background-color:steelblue;width:90%; margin-left:20px">
-	                    		<span style="color:white;font-size:15px">Notification Center</span>
+	                    		<span style="color:white;font-size:15px">Search Page</span>
 	                    	</div>
                     	</div>
                     	<br/>
@@ -35,7 +35,7 @@
                     	</tr>
                     	<tr>
                     	<td colspan="2">
-	                    	<button style="width:600px;margin-left:100px;" id="submit" name="submit" class="btn btn-primary">Search!</button>
+	                    	<input type="submit" style="width:600px;margin-left:100px;" value="Submit" class="btn btn-info btn-block"/>
                     	</tr>
                     	</table>
                     	</form>

@@ -35,7 +35,9 @@ public class EmployeeClaims {
 		
 		for(ClaimStatus claimStatus:ClaimStatus.values())
 		{
+			if(claimStatus != ClaimStatus.APPLIED){
 			employeeclaimStatus.add(claimStatus.toString());
+			}
 		}
 	}
 	

@@ -4,7 +4,7 @@
 <!-- Generated Apr 17, 2017 5:40:01 PM by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
     <class name="industree.Model.EmployeeLeave" table="EmployeeLeave_tbl">
-        <id name="employeeLeaveId" type="int">
+        <id name="employeeLeaveId" type="java.lang.String">
             <column name="employeeLeaveId" />
             <generator class="assigned"/>
         </id>

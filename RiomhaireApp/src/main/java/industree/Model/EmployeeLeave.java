@@ -16,7 +16,7 @@ public class EmployeeLeave {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "employeeLeaveId")
-	private int employeeLeaveId;
+	private String employeeLeaveId;
 	
 	@Column(name = "startDate")
 	private String startDate;
@@ -42,11 +42,11 @@ public class EmployeeLeave {
 	@Transient
 	private String leaveStatus;
 
-	public int getEmployeeLeaveId() {
+	public String getEmployeeLeaveId() {
 		return employeeLeaveId;
 	}
 
-	public void setEmployeeLeaveId(int employeeLeaveId) {
+	public void setEmployeeLeaveId(String employeeLeaveId) {
 		this.employeeLeaveId = employeeLeaveId;
 	}
 

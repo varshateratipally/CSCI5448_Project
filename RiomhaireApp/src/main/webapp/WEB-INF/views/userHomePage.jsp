@@ -69,12 +69,14 @@
                </c:if>
                <c:if test = "${employee.designation == 'HRManager' }">
                   <li role="presentation" class="brand-nav">
-                     <a aria-controls="#myLine" role="tab" data-toggle="tab" href="#approvalcenter"><span style="color:white;">Approval Central</span></a>
+                     <a aria-controls="#myLine" role="tab" data-toggle="tab" href="#approvalcenter">
+                     <span style="color:white;">Approval Central</span></a>
                   </li>
                </c:if>
                <c:if test = "${employee.designation == 'HRManager' }">
                   <li role="presentation" class="brand-nav">
-                     <a aria-controls="#myLine" role="tab" data-toggle="tab" href="#employeeCreation"><span style="color:white;">Employee Creation</span></a>
+                     <a aria-controls="#myLine" role="tab" data-toggle="tab" href="#employeeCreation">
+                     <span style="color:white;">Employee Creation</span></a>
                   </li>
                </c:if>
                <li role ="presentation" class="brand-nav">
@@ -83,17 +85,34 @@
                   </a>
                </li>
                <li role="presentation" class="brand-nav"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">
-                  <span style="color:white">Leaves and Claims</span></a>
+                  <span style="color:white">Leaves and Claims</span>
+                  </a>   
+               </li>
+               <li role="presentation" class="brand-nav"><a href="#appliedLeavesAndClaims" aria-controls="tab2" role="tab" data-toggle="tab">
+                  <span style="color:white">Applied Leaves and Claims</span>
+                  </a>   
                </li>
                <li role="presentation" class="brand-nav"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">
                   <span style="color:white">Employee Search</span></a>
                </li>
+               <c:if test = "${employee.designation =='Admin'}">
+               	<li role="presentation" class="brand-nav"><a href="#deactivateEmployee" aria-controls="deactivateEmployee" role="tab" data-toggle="tab">
+                  <span style="color:white">Employee Management</span></a>
+               	</li>
+               </c:if>
+                <c:if test = "${employee.designation =='FactoryManager'}">
+               	<li role="presentation" class="brand-nav"><a href="#requestStock" aria-controls="deactivateEmployee" role="tab" data-toggle="tab">
+                  <span style="color:white">Request Stock</span></a>
+               	</li>
+               </c:if>
             </ul>
          </div>
          
          <div class="col-sm-9">
             <div class="tab-content">
-               
+               <div role="tabpanel" class="tab-pane" id="deactivateEmployee">
+                  <%@ include file="deactivateEmployee.jsp" %>
+               </div>
                <div role="tabpanel" class="tab-pane" id="myaccountjsp">
                <c:set var= "contactNumber" value ="${employee.workContact}"/>
                <c:set var= "address" value ="${user.address}"/>
@@ -105,8 +124,14 @@
                <div role="tabpanel" class="tab-pane" id="tab2">
                   <%@ include file="include.jsp" %>
                </div>
+               <div role="tabpanel" class="tab-pane" id="requestStock">
+                  <%@ include file="requestStock.jsp" %>
+               </div>
                <div role ="tabpanel" class="tab-pane" id="tab3">
                   <%@ include file="searchPage.jsp" %>
+               </div>
+              <div role ="tabpanel" class="tab-pane" id="appliedLeavesAndClaims">
+                  <%@ include file="appliedLeavesAndClaims.jsp" %>
                </div>
                <div role="tabpanel" class="tab-pane active" id="dashboard">
                   <div class="row">
@@ -151,6 +176,7 @@
                            <c:forEach items="${employeeClaimsList.employeeClaims}" var = "employeeClaim" varStatus = "status">
                               <tr>
                                  <form:hidden path="employeeClaims[${status.index}].employeeClaimId" />
+                                  <form:hidden path="employeeClaims[${status.index}].appliedDate"/>
                                  <td> <input type="text" name="employeeClaims[${status.index}].employeeId" value="${employeeClaim.employeeId}" readonly=true/></td>
                                  <td> <input type="text" name="employeeClaims[${status.index}].claimComment" value="${employeeClaim.claimComment}" readonly = true /></td>
                                  <td> <input type="text" name="employeeClaims[${status.index}].purchaseDate" value="${employeeClaim.purchaseDate}" readonly=true/></td>
@@ -190,6 +216,7 @@
                            <c:forEach items="${employeeLeavesList.employeeLeaves}" var = "employeeLeave" varStatus = "status">
                               <tr>
                                  <form:hidden path="employeeLeaves[${status.index}].employeeLeaveId"/>
+                                  <form:hidden path="employeeLeaves[${status.index}].appliedDate"/>
                                  <td> <input type="text" name="employeeLeaves[${status.index}].employeeId" value="${employeeLeave.employeeId}" readonly=true/></td>
                                  <td> <input type="text" name="employeeLeaves[${status.index}].leaveComment" value="${employeeLeave.leaveComment}" readonly=true/></td>
                                  <td> <input type="text" name="employeeLeaves[${status.index}].startDate" value="${employeeLeave.startDate}" readonly=true/></td>

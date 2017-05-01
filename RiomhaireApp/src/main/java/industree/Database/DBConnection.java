@@ -225,7 +225,7 @@ public class DBConnection implements IDBConnection {
 				{
 					employee = employeeLoop;
 					searchResult = new SearchResults(name, employee.getWorkContact(), employee.getDepartment(), employee.getDesignation()
-							, employee.getDateOfJoining(), user1.getEmailAddress());
+							, employee.getDateOfJoining(), user1.getEmailAddress(), employee.getEmployeeId());
 					searchResults.add(searchResult);
 					break;
 				}
@@ -309,6 +309,7 @@ public class DBConnection implements IDBConnection {
 		
 	}
 	
+	@Override
 	public void updateEmployee(Employee employee)
 	{
 		Session session = beginSession();
@@ -317,12 +318,147 @@ public class DBConnection implements IDBConnection {
 		
 	}
 	
+	@Override
+	public List<EmployeeLeave> getAppliedLeaves(String employeeId)
+	{
+		Session session = beginSession();
+		String queried = "from EmployeeLeave e where e.employeeId = :employeeId";
+		Query query = session.createQuery(queried);
+		query.setParameter("employeeId", employeeId);
+		List<EmployeeLeave> ls = query.list();
+		
+		session.close();
+		return ls;
+		
+	}
+	
+	@Override
+	public List<EmployeeClaim> getAppliedClaims(String employeeId)
+	{
+		Session session = beginSession();
+		String queried = "from EmployeeClaim e where e.employeeId = :employeeId";
+		Query query = session.createQuery(queried);
+		query.setParameter("employeeId", employeeId);
+		List<EmployeeClaim> ls = query.list();
+		
+		session.close();
+		return ls;
+		
+	}
+	
+	
 	private void createNotification(Notification notification)
 	{
 		
 		Session session = beginSession();
 		session.save(notification);
 		session.beginTransaction().commit();
+	}
+	
+	@Override
+	public void deleteClaim(String employeeClaimId)
+	{
+		Session session= beginSession();
+		String queried = "delete from EmployeeClaim where employeeClaimId = :employeeClaimId";
+		Query query = session.createQuery(queried);
+		query.setParameter("employeeClaimId", employeeClaimId);
+		session.beginTransaction();
+		query.executeUpdate();
+		session.close();
+	}
+	
+	@Override
+	public void deleteLeave(String employeeLeaveId)
+	{
+		Session session= beginSession();
+		String queried = "delete from EmployeeLeave where employeeLeaveId = :employeeLeaveId";
+		Query query = session.createQuery(queried);
+		query.setParameter("employeeLeaveId", employeeLeaveId);
+		session.beginTransaction();
+		query.executeUpdate();
+		session.close();
+	}
+	
+	public void deleteEmployee(String employeeId)
+	{
+		Session session = beginSession();
+		String queried = "delete from EmployeeLeave where employeeId = :employeeId";
+		String deleteClaimquery = "delete from EmployeeClaim where employeeId = :employeeId";
+		String deleteLineStatus = "delete from WorkingLineStatus where employeeId = :employeeId";
+		String deleteEmployee = "delete from Employee where employeeId  = :employeeId";
+		Query query = session.createQuery(queried);
+		query.setParameter("employeeId", employeeId);
+		
+		Query deleteClaim = session.createQuery(deleteClaimquery);
+		deleteClaim.setParameter("employeeId", employeeId);
+		
+		Query deleteLineStatusQuery= session.createQuery(deleteLineStatus);
+		deleteLineStatusQuery.setParameter("employeeId", employeeId);
+		
+		Query deleteEmployeeQuery = session.createQuery(deleteEmployee);
+		deleteEmployeeQuery.setParameter("employeeId", employeeId);
+		
+		session.beginTransaction();
+		query.executeUpdate();
+		deleteClaim.executeUpdate();
+		deleteLineStatusQuery.executeUpdate();
+		deleteEmployeeQuery.executeUpdate();
+		session.close();
+		
+	}
+	
+	@Override
+	public void updateUserRoleStatus(String employeeId, String designation,int userRoleStatusId)
+	{
+		int userId  = this.getUserId(employeeId);
+		if(userId>0){
+		Session session = beginSession();
+		String queried = "Update Employee set designation= :designation where employeeId = :employeeId";
+		Query query = session.createQuery(queried);
+		query.setParameter("designation", designation);
+		query.setParameter("employeeId", employeeId);
+		
+		
+		String userqueried = "Update User set userRoleId= :userRoleStatusId where userId = :userId";
+		Query userquery = session.createQuery(userqueried);
+		userquery.setParameter("userRoleStatusId", userRoleStatusId);
+		userquery.setParameter("userId", this.getUserId(employeeId));
+		
+		session.beginTransaction();
+		query.executeUpdate();
+		userquery.executeUpdate();
+		session.close();
+		}
+	}
+	
+	private int getUserId(String employeeId)
+	{
+		Session session = beginSession();
+		String queried = "from Employee e where e.employeeId = :employeeId";
+		Query query = session.createQuery(queried);
+		query.setParameter("employeeId", employeeId);
+		List<User> user =  query.list();
+		int userId=0;
+		if(user != null)
+		{
+			userId  = user.get(0).getUserId();
+		}
+		session.close();
+		
+		return userId;
+	}
+	
+	public void updateStock(int stockTypeId , int lineId, int stock){
+		
+		Session session = beginSession();
+		String queried = "Update WorkingLineStatus set stock = :stock where stockTypeId = :stockTypeId and lineId = :lineId";
+		Query query = session.createQuery(queried);
+		query.setParameter("stock", stock);
+		query.setParameter("stockTypeId", stockTypeId);
+		query.setParameter("lineId", lineId);
+		session.beginTransaction();
+		query.executeUpdate();
+		session.close();
 	}
 	
 	
