@@ -68,12 +68,12 @@ public class HomeController {
 	
 	@RequestMapping(value="processCredentials", method = RequestMethod.POST)
 	public String processCredentials(@RequestParam("userName")String userName, @RequestParam("password")String password, Model model) {
-		/*
-		if(!userName.contains("@Riomhaire.edu"))
+		
+		if(!userName.contains("@riomhaire.com"))
 		{
-			model.addAttribute("message", "username is invalid");
+			model.addAttribute("message", "Username is invalid");
 			return "loginPage";
-		}*/
+		}
 		this.user = dbConnection.validateLoginUser(userName, utility.getHashPassword(password));
 		if(user!=null)
 		{
@@ -84,7 +84,7 @@ public class HomeController {
 		}
 		else
 		{
-			model.addAttribute("message", "Invalid UserName or Password. Please Try Again.");
+			model.addAttribute("message", "Invalid UserName or Password. Please try again!");
 			return "loginPage";
 		}
 	}
@@ -118,7 +118,7 @@ public class HomeController {
 		
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage","Successfully Applied for Claim");
+		model.addAttribute("alertMessage","Successfully Applied Claim");
 		
 		
 		return "userHomePage"; 
@@ -130,11 +130,22 @@ public class HomeController {
 			@RequestParam("leaveComment") String memo, Model model) throws ParseException
 	{
 		EmployeeLeave employeeLeave = new EmployeeLeave(employee.getEmployeeId(),startDate, endDate, memo);
+		Date start = (Date)new SimpleDateFormat("mm/dd/yyyy").parse(startDate);
+		Date end = (Date)new SimpleDateFormat("mm/dd/yyyy").parse(endDate);
+		if(start.compareTo(end)>0)
+		{
+			initializeVariables();
+			model = this.bindVariables(model);
+			model.addAttribute("alertMessage","StartDate Cannot be greater than EndDate !");
+			
+			
+			return "userHomePage"; 
+		}
 		
 		dbConnection.saveAppliedLeave(employeeLeave);
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage","Successfully Applied for Leave");
+		model.addAttribute("alertMessage","Successfully Applied Leave");
 		
 		
 		return "userHomePage"; 
@@ -199,7 +210,7 @@ public class HomeController {
 		System.out.print("of the funtion");
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage", "Employee Created Successfully");
+		model.addAttribute("alertMessage", "Employee Created successfully");
 		
 		
 		return "userHomePage";
@@ -217,7 +228,7 @@ public class HomeController {
 		}
 		if(searchResults.size()==0)
 		{
-			model.addAttribute("alertMessage", "No Results");
+			model.addAttribute("alertMessage", "No results");
 		}
 		model.addAttribute("searchResults", searchResults);
 		
@@ -265,7 +276,7 @@ public class HomeController {
 		dbConnection.deleteLeave(employeeLeaveId);
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage", "Claim Deleted");
+		model.addAttribute("alertMessage", "Leave Deleted");
 		
 		return "userHomePage";
 	}
@@ -280,7 +291,7 @@ public class HomeController {
 		
 		initializeVariables();
 		model = this.bindVariables(model);
-		model.addAttribute("alertMessage", "Details Saved");
+		model.addAttribute("alertMessage", "Details saved!");
 		
 		
 		return "userHomePage";
