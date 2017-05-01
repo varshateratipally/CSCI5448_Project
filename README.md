@@ -9,10 +9,10 @@ A user-friendly platform aimed to aid in the management of day-to-day working in
 
 ## Steps to setup:
 * Download the code by either cloning the repository or the zipped version.
--You'll need to update your JDK to a version 1.8.121 or above.
--Update the IDE by including JAR files for spring and hibernate. You can make use of JBoss Tools packages.
--Build the path for getting it running.
--Setup the apache server for running it in local environment.
--The database file is included in the project folder as databasegenerationscript.sql. You can open and run the queries through MYSQL on your local machine.
--Change the hibernate configuration file settings to match and synchronize with the MYSQL database.
--Once the server is up and running, open the following link in your browser: localhost:8080/RiomhaireApp/login.
+* You'll need to update your JDK to a version 1.8.121 or above.
+* Update the IDE by including JAR files for spring and hibernate. You can make use of JBoss Tools packages.
+* Build the path for getting it running.
+* Setup the apache server for running it in local environment.
+* The database file is included in the project folder as databasegenerationscript.sql. You can open and run the queries through MYSQL on your local machine.
+* Change the hibernate configuration file settings to match and synchronize with the MYSQL database.
+* Once the server is up and running, open the following link in your browser: localhost:8080/RiomhaireApp/login.
