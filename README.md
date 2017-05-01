@@ -8,7 +8,7 @@ A user-friendly platform aimed to aid in the management of day-to-day working in
 
 
 ## Steps to setup:
--Download the code by either cloning the repository or the zipped version.
+*Download the code by either cloning the repository or the zipped version.
 -You'll need to update your JDK to a version 1.8.121 or above.
 -Update the IDE by including JAR files for spring and hibernate. You can make use of JBoss Tools packages.
 -Build the path for getting it running.
