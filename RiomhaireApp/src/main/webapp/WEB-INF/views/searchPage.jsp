@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/3/css/bootstrap.css" />
+ 
+  <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
@@ -15,8 +22,8 @@
                     	</div>
                     	<br/>
                     	<br/>
-            <div class="row">
-                    	<form action="viewResults" method="POST" class="form-horizontal" >
+            		<div class="row">
+                    	<form action="viewResults" method="post">
                     	<table style ="width:80%;margin-left:20px;">
                     	<tr>
                     	<td>
@@ -35,7 +42,7 @@
                     	</tr>
                     	<tr>
                     	<td colspan="2">
-	                    	<input type="submit" style="width:600px;margin-left:100px;" value="Submit" class="btn btn-info btn-block"/>
+	                    	<input type="submit" value="Submit" style="width:600px;margin-left:100px;"  class="btn btn-info btn-block"/>
                     	</tr>
                     	</table>
                     	</form>

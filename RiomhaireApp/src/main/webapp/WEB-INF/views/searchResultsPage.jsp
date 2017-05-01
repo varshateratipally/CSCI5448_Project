@@ -90,7 +90,6 @@
 <td><c:out value = "${searchResult.contactNumber}"/></td>
 <td><c:out value = "${searchResult.dateOfJoining}"/></td>
 <td><c:out value = "${searchResult.designation}"/></td>
-<td><c:out value = "${searchResult.designation}"/></td>
 <td><c:out value = "${searchResult.employeeId}"/></td>
 </c:if>
 </tr>

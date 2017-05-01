@@ -74,8 +74,7 @@ public class HomeController {
 			model.addAttribute("message", "username is invalid");
 			return "loginPage";
 		}*/
-		this.user = dbConnection.validateLoginUser(userName, password);
-		
+		this.user = dbConnection.validateLoginUser(userName, utility.getHashPassword(password));
 		if(user!=null)
 		{
 			this.initializeVariables();
@@ -206,7 +205,7 @@ public class HomeController {
 		return "userHomePage";
 	}
 	
-	@RequestMapping(value="viewResults", method=RequestMethod.POST)
+	@RequestMapping(value="/viewResults", method=RequestMethod.POST)
 	public String ViewSearchResults(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
 			@RequestParam("department") String department, Model model) 
 	{
@@ -228,7 +227,17 @@ public class HomeController {
 	@RequestMapping(value="/savePassword", method=RequestMethod.POST)
 	public String SavePassword(@RequestParam("password") String password, @RequestParam("confirmpassword") String confirmPassword, Model model)
 	{
-		user.setPassword(password);
+		if(password.compareTo(confirmPassword)!=0)
+		{
+			initializeVariables();
+			model = this.bindVariables(model);
+			model.addAttribute("alertMessage", "Password and Confirm passwords doesn't match!");
+			
+			
+			return "userHomePage";
+			
+		}
+		user.setPassword(utility.getHashPassword(password));
 		dbConnection.updateUser(user);
 		
 		initializeVariables();

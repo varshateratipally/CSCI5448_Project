@@ -20,18 +20,13 @@
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button> 
-               <a class="navbar-brand text-hide" href="http://disputebills.com" style="background: url(https://canvas.facebook.com/images/canvas/logo-mrporter-2x.png) center / contain no-repeat; width:200px;">Text</a>
-            </div>
-            <div id="nav6" class="navbar-collapse-collapse">
-               <ul class="nav navbar-nav navbar-right">
-                  <li><a href="logout"><span style="color:white;">Sign Out</span></a></li>
-               </ul>
+               <a class="navbar-brand text-hide" href="http://disputebills.com" style="background: url(https://image.ibb.co/hjw3J5/Transparent4.png) center / contain no-repeat; width:200px;">Text</a>
             </div>
          </div>
       </nav>
       <style>
          @media (min-width: 7px) {
-         .brand-pills > li > a {
+         .brand-pills` > li > a {
          border-top-right-radius: 0px;
          border-bottom-right-radius: 0px;
          background-color: grey;
