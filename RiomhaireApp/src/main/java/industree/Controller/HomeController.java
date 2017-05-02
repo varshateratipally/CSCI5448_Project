@@ -154,7 +154,7 @@ public class HomeController {
 	@RequestMapping(value="approvalLeaves", method = RequestMethod.POST )
 	public String ApprovalLeaves(@ModelAttribute("employeeLeavesList") EmployeeLeaves  employeeLeave, Model model)
 	{	
-		System.out.print("approval leaves");
+		
 		if(!employeeLeave.getEmployeeLeaves().isEmpty())
 		{
 			dbConnection.saveApprovedLeaves(employeeLeave.getEmployeeLeaves());
