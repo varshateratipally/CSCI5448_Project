@@ -23,13 +23,13 @@
 <br/>
 <div class="row">
 
-<form class="form-horizontal" action="savePassword" method="POST">
+<form class="form-horizontal" data-toggle="validator"  action="savePassword" method="POST">
 <fieldset>
 
 <div class="form-group">
   <label class="col-md-4 control-label" for="password">Password</label>  
   <div class="col-md-4">
-  <input  name="password" type="password" placeholder="Password" class="form-control input-md" required=""/>
+  <input  name="password" type="password" id="inputpassword" placeholder="Password" class="form-control input-md" required=""/>
     
   </div>
 </div>
@@ -38,7 +38,8 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="confirmpassword">Confirm Password</label>  
   <div class="col-md-4">
-  <input name="confirmpassword" type="password" placeholder="Confirm Password" class="form-control input-md" required=""/>
+  <input name="confirmpassword" type="password" placeholder="Confirm Password"
+   class="form-control input-md" data-match ="#inputpassword" data-match-error="Whoops, these don't match" required=""/>
   </div>
 </div>
 

@@ -58,76 +58,89 @@ padding-left: 15px;
              <span style="color: white"> Stock </span>
               </div>
               <div class="col-xs-2" id="p2">
-              <img src= "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTZ7oJXp-lUAY0MP9ZdXkurA8BaOXJdYVxA4BHlsc1AV6uiWBgNeg" 
+              <img src= "<c:url value="/images/Picture1.png"/>"
                width=100px height=100px/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${electronicsStatus.status}</textarea>
+               <textarea rows="1" id="electronicsStatustext" style="width: 100px;" readonly> ${electronicsStatus.status}</textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${electronicsStatus.startPosition}  -  ${electronicsStatus.startPosition} </textarea>
+               <textarea rows="1" id="electronicsStatusPosition" style="width: 100px;" readonly> ${electronicsStatus.startPosition}  -  ${electronicsStatus.startPosition} </textarea>
                 <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${electronicsStatus.stock}</textarea>
+               <textarea rows="1" id="electronicsStock" style="width: 100px;" readonly> ${electronicsStatus.stock}</textarea>
               </div>
               <div class="col-xs-2" id="p3">
-				<img src= "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTZ7oJXp-lUAY0MP9ZdXkurA8BaOXJdYVxA4BHlsc1AV6uiWBgNeg"
+				<img src= "<c:url value="/images/Picture2.png"/>"
 				width=100px height=100px
 				/>
 				<br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${screenStatus.status}</textarea>
+               <textarea rows="1" id="screenStatus" style="width: 100px;" readonly> ${screenStatus.status}</textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${screenStatus.startPosition}  -  ${screenStatus.startPosition} </textarea>
+               <textarea rows="1" id="screenStatusPosition" style="width: 100px;" readonly> ${screenStatus.startPosition}  -  ${screenStatus.startPosition} </textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${screenStatus.stock} </textarea>
+               <textarea rows="1" id="screenStatusStock" style="width: 100px;" readonly> ${screenStatus.stock} </textarea>
                
 			  </div>
               <div class="col-xs-2" id="p4">
-              <img src= "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTZ7oJXp-lUAY0MP9ZdXkurA8BaOXJdYVxA4BHlsc1AV6uiWBgNeg"
+              <img src= "<c:url value="/images/Picture3.png"/>"
               width=100px height=100px
               />
               <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${casingStatus.status} </textarea>
+               <textarea rows="1" id="casingStatus" style="width: 100px;" readonly> ${casingStatus.status} </textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${casingStatus.startPosition}  -  ${casingStatus.startPosition} </textarea>
+               <textarea rows="1" id="casingStatusPosition" style="width: 100px;" readonly> ${casingStatus.startPosition}  -  ${casingStatus.startPosition} </textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${casingStatus.stock}</textarea>
+               <textarea rows="1" id="casingStatusStock" style="width: 100px;" readonly> ${casingStatus.stock}</textarea>
                
               </div>
               <div class="col-xs-2" id="p5">
-              <img src= "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTZ7oJXp-lUAY0MP9ZdXkurA8BaOXJdYVxA4BHlsc1AV6uiWBgNeg"
+              <img src= "<c:url value="/images/Picture4.png"/>"
               width=100px height=100px
               />
               <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${batteryStatus.status}</textarea>
+               <textarea rows="1" id="batteryStatus" style="width: 100px;" readonly> ${batteryStatus.status}</textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${batteryStatus.startPosition}  -  ${batteryStatus.startPosition} </textarea>
+               <textarea rows="1" id="batteryStatusPosition" style="width: 100px;" readonly> ${batteryStatus.startPosition}  -  ${batteryStatus.startPosition} </textarea>
                <br/>
                <br/>
                <br/>
-               <textarea rows="1" style="width: 100px;" readonly> ${batteryStatus.stock}</textarea>
+               <textarea rows="1" id="batteryStatusStock" style="width: 100px;" readonly> ${batteryStatus.stock}</textarea>
                
               </div>
             <!-- //col-lg-12 -->
           </div>
           <!-- //row -->
         </div>
-      </div>
+   <br/>
+   <br/>
+   <br/>
 
+</div>
+<script type="text/javascript">
+setInterval(function page_Reload()
+{
+	var x = document.getElementById("myline").getElementsByTagName("electronicsStatustext");
+	alert("stock low");
+	location.reload();
+},1000*60*10);
+
+
+</script>
 </body>
 </html>

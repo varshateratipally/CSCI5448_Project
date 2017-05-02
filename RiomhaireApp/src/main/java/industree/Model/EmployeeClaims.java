@@ -20,6 +20,14 @@ public class EmployeeClaims {
 		this.employeeClaims= employeeClaims;
 	}
 	
+	public List<String> getEmployeeclaimStatus() {
+		return employeeclaimStatus;
+	}
+
+	public void setEmployeeclaimStatus(List<String> employeeclaimStatus) {
+		this.employeeclaimStatus = employeeclaimStatus;
+	}
+
 	public EmployeeClaims()
 	{
 		employeeClaims=new ArrayList<EmployeeClaim>();
@@ -27,7 +35,9 @@ public class EmployeeClaims {
 		
 		for(ClaimStatus claimStatus:ClaimStatus.values())
 		{
+			if(claimStatus != ClaimStatus.APPLIED){
 			employeeclaimStatus.add(claimStatus.toString());
+			}
 		}
 	}
 	

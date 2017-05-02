@@ -10,7 +10,14 @@ public class SearchResults {
 	private String designation;
 	private String mailAddress;
 	private Date dateOfJoining;
+	private String employeeId;
 	
+	public String getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
+	}
 	public String getName() {
 		return name;
 	}
@@ -54,7 +61,8 @@ public class SearchResults {
 		
 	}
 	
-	public SearchResults(String name, String contactNumber, String department, String designation, Date dateOfJoining, String  mailAddress)
+	public SearchResults(String name, String contactNumber, String department, String designation, Date dateOfJoining, String  mailAddress
+			, String employeeId)
 	{
 		this.name= name;
 		this.contactNumber = contactNumber;
@@ -62,6 +70,7 @@ public class SearchResults {
 		this.designation = designation;
 		this.dateOfJoining = dateOfJoining;
 		this.mailAddress = mailAddress;	
+		this.employeeId = employeeId;
 		
 	}
 	

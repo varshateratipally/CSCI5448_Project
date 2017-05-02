@@ -17,13 +17,13 @@
         <property name="amount" type="int">
             <column name="amount" />
         </property>
-        <property name="purchaseDate" type="java.util.Date">
+        <property name="purchaseDate" type="java.lang.String">
             <column name="purchaseDate" />
         </property>
-        <property name="appliedDate" type="java.util.Date">
+        <property name="appliedDate" type="java.lang.String">
             <column name="appliedDate" />
         </property>
-        <property name="approvedDate" type="java.util.Date">
+        <property name="approvedDate" type="java.lang.String">
             <column name="approvedDate" />
         </property>
         <property name="claimStatusId" type="int">

@@ -77,7 +77,7 @@ public class DBConnection implements IDBConnection {
 		}
 		for(Employee employee : employeeList)
 		{
-			query = session.createQuery("from EmployeeLeave where employeeId = :employeeId");
+			query = session.createQuery("from EmployeeLeave where employeeId = :employeeId and leaveStatusId = 1");
 			query.setParameter("employeeId", employee.getEmployeeId());
 			employeeLeavesList.addAll((List<EmployeeLeave>)query.list());
 		}
@@ -87,21 +87,26 @@ public class DBConnection implements IDBConnection {
 
 	@Override
 	public EmployeeClaims getEmployeeClaims(String managerId) {
+		EmployeeClaims employeeClaims = new EmployeeClaims();
+		List<EmployeeClaim> employeeClaimsList= new ArrayList<EmployeeClaim>();
 		Session session = beginSession();
-		String queried="from EmployeeClaim e where e.employeeId = :managerId";
+		String queried = "from Employee where managerId = :managerId";
+		
 		Query query = session.createQuery(queried);
 		query.setParameter("managerId", managerId);
-		List<EmployeeClaim> ls = query.list();
-		
-		if(ls == null || ls.isEmpty())
+		List<Employee> employeeList = query.list();
+		if(employeeList == null || employeeList.isEmpty())
 		{
 			return null;
 		}
-		session.close();
-		EmployeeClaims ee= new EmployeeClaims();
-		ee.setEmployeeClaims(ls);
-		
-		return ee;
+		for(Employee employee : employeeList)
+		{
+			query = session.createQuery("from EmployeeClaim where employeeId = :employeeId and claimStatusId = 1");
+			query.setParameter("employeeId", employee.getEmployeeId());
+			employeeClaimsList.addAll((List<EmployeeClaim>)query.list());
+		}
+		employeeClaims.setEmployeeClaims(employeeClaimsList);
+		return employeeClaims;
 	}
 
 	@Override
@@ -126,9 +131,13 @@ public class DBConnection implements IDBConnection {
 
 	@Override
 	public void saveAppliedLeave(EmployeeLeave employeeLeave) {
+		Notification notification = new Notification(employeeLeave.getEmployeeId(),
+				"Your leave for "+ employeeLeave.getStartDate()+ " to "+ employeeLeave.getEndDate()+
+				" has been applied on " + employeeLeave.getAppliedDate());
 		Session session =  beginSession();
 		session.save(employeeLeave);
 		session.beginTransaction().commit();
+		this.createNotification(notification);
 		
 	}
 
@@ -136,6 +145,10 @@ public class DBConnection implements IDBConnection {
 	public void saveAppliedClaim(EmployeeClaim employeeClaim) {
 		Session session =  beginSession();
 		session.save(employeeClaim);
+		Notification notification = new Notification(employeeClaim.getEmployeeId(),
+				"Your claim for "+ employeeClaim.getClaimItemType()+
+				" has been applied");
+		this.createNotification(notification);
 		session.beginTransaction().commit();
 	}
 
@@ -145,11 +158,15 @@ public class DBConnection implements IDBConnection {
 		Session session = beginSession();
 		for(EmployeeLeave employeeLeave : employeeLeaves)
 		{
+			
 			session.saveOrUpdate(employeeLeave);
+			Notification notification = new Notification(employeeLeave.getEmployeeId(),
+					"Your leave for "+ employeeLeave.getStartDate()+ " to "+ employeeLeave.getEndDate()+
+					" has been approved");
+			this.createNotification(notification);
 			
 		}
 		session.beginTransaction().commit();
-		
 	}
 
 	@Override
@@ -158,6 +175,10 @@ public class DBConnection implements IDBConnection {
 		for(EmployeeClaim employeeClaim : employeeClaims)
 		{
 			session.saveOrUpdate(employeeClaim);
+			Notification notification = new Notification(employeeClaim.getEmployeeId(),
+					"Your claim for "+ employeeClaim.getClaimItemType()+
+					" has been approved");
+			this.createNotification(notification);
 			
 		}
 		session.beginTransaction().commit();
@@ -190,10 +211,7 @@ public class DBConnection implements IDBConnection {
 			ids.add(user.getUserId());
 		}
 		Employee employee= new Employee();
-		System.out.println(ids);
-		System.out.println(department);
 		List<Employee> employees= this.getEmployeeFromUserIds(ids, department);
-		System.out.println("out of the method");
 		SearchResults searchResult;
 		String name="";
 		
@@ -207,7 +225,7 @@ public class DBConnection implements IDBConnection {
 				{
 					employee = employeeLoop;
 					searchResult = new SearchResults(name, employee.getWorkContact(), employee.getDepartment(), employee.getDesignation()
-							, employee.getDateOfJoining(), user1.getEmailAddress());
+							, employee.getDateOfJoining(), user1.getEmailAddress(), employee.getEmployeeId());
 					searchResults.add(searchResult);
 					break;
 				}
@@ -291,12 +309,156 @@ public class DBConnection implements IDBConnection {
 		
 	}
 	
+	@Override
 	public void updateEmployee(Employee employee)
 	{
 		Session session = beginSession();
 		session.saveOrUpdate(employee);
 		session.beginTransaction().commit();
 		
+	}
+	
+	@Override
+	public List<EmployeeLeave> getAppliedLeaves(String employeeId)
+	{
+		Session session = beginSession();
+		String queried = "from EmployeeLeave e where e.employeeId = :employeeId";
+		Query query = session.createQuery(queried);
+		query.setParameter("employeeId", employeeId);
+		List<EmployeeLeave> ls = query.list();
+		
+		session.close();
+		return ls;
+		
+	}
+	
+	@Override
+	public List<EmployeeClaim> getAppliedClaims(String employeeId)
+	{
+		Session session = beginSession();
+		String queried = "from EmployeeClaim e where e.employeeId = :employeeId";
+		Query query = session.createQuery(queried);
+		query.setParameter("employeeId", employeeId);
+		List<EmployeeClaim> ls = query.list();
+		
+		session.close();
+		return ls;
+		
+	}
+	
+	
+	private void createNotification(Notification notification)
+	{
+		
+		Session session = beginSession();
+		session.save(notification);
+		session.beginTransaction().commit();
+	}
+	
+	@Override
+	public void deleteClaim(String employeeClaimId)
+	{
+		Session session= beginSession();
+		String queried = "delete from EmployeeClaim where employeeClaimId = :employeeClaimId";
+		Query query = session.createQuery(queried);
+		query.setParameter("employeeClaimId", employeeClaimId);
+		session.beginTransaction();
+		query.executeUpdate();
+		session.close();
+	}
+	
+	@Override
+	public void deleteLeave(String employeeLeaveId)
+	{
+		Session session= beginSession();
+		String queried = "delete from EmployeeLeave where employeeLeaveId = :employeeLeaveId";
+		Query query = session.createQuery(queried);
+		query.setParameter("employeeLeaveId", employeeLeaveId);
+		session.beginTransaction();
+		query.executeUpdate();
+		session.close();
+	}
+	
+	public void deleteEmployee(String employeeId)
+	{
+		Session session = beginSession();
+		String queried = "delete from EmployeeLeave where employeeId = :employeeId";
+		String deleteClaimquery = "delete from EmployeeClaim where employeeId = :employeeId";
+		String deleteLineStatus = "delete from WorkingLineStatus where employeeId = :employeeId";
+		String deleteEmployee = "delete from Employee where employeeId  = :employeeId";
+		Query query = session.createQuery(queried);
+		query.setParameter("employeeId", employeeId);
+		
+		Query deleteClaim = session.createQuery(deleteClaimquery);
+		deleteClaim.setParameter("employeeId", employeeId);
+		
+		Query deleteLineStatusQuery= session.createQuery(deleteLineStatus);
+		deleteLineStatusQuery.setParameter("employeeId", employeeId);
+		
+		Query deleteEmployeeQuery = session.createQuery(deleteEmployee);
+		deleteEmployeeQuery.setParameter("employeeId", employeeId);
+		
+		session.beginTransaction();
+		query.executeUpdate();
+		deleteClaim.executeUpdate();
+		deleteLineStatusQuery.executeUpdate();
+		deleteEmployeeQuery.executeUpdate();
+		session.close();
+		
+	}
+	
+	@Override
+	public void updateUserRoleStatus(String employeeId, String designation,int userRoleStatusId)
+	{
+		int userId  = this.getUserId(employeeId);
+		if(userId > 0){
+		Session session = beginSession();
+		String queried = "Update Employee set designation= :designation where employeeId = :employeeId";
+		Query query = session.createQuery(queried);
+		query.setParameter("designation", designation);
+		query.setParameter("employeeId", employeeId);
+		
+		
+		String userqueried = "Update User set userRoleId= :userRoleStatusId where userId = :userId";
+		Query userquery = session.createQuery(userqueried);
+		userquery.setParameter("userRoleStatusId", userRoleStatusId);
+		userquery.setParameter("userId", this.getUserId(employeeId));
+		
+		session.beginTransaction();
+		query.executeUpdate();
+		userquery.executeUpdate();
+		session.close();
+		}
+	}
+	
+	private int getUserId(String employeeId)
+	{
+		Session session = beginSession();
+		String queried = "from Employee e where e.employeeId = :employeeId";
+		Query query = session.createQuery(queried);
+		query.setParameter("employeeId", employeeId);
+		List<Employee> user =  query.list();
+		int userId=0;
+		if(user != null && user.size()>0)
+		{
+			userId  = user.get(0).getUserId();
+		}
+		session.close();
+		
+		return userId;
+	}
+	
+	public void updateStock(int stockTypeId , int lineId, int stock){
+		
+		Session session = beginSession();
+		String queried = "Update WorkingLineStatus set stock = :stock where stockTypeId = :stockTypeId and lineId = :lineId";
+		Query query = session.createQuery(queried);
+		query.setParameter("stock", stock);
+		query.setParameter("stockTypeId", stockTypeId);
+		query.setParameter("lineId", lineId);
+		session.beginTransaction();
+		query.executeUpdate();
+		session.close();
 	}
 	
 	

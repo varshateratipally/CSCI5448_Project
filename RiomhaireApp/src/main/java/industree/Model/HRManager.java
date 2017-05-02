@@ -1,6 +1,6 @@
 package industree.Model;
 
-
+//Inheriting properties of Employee in HRManager
 public class HRManager extends Employee{
 
 	public HRManager(int userId, String employeeId, String managerId, String workContactNumber, 
