@@ -30,22 +30,19 @@ public class EmployeeFactory {
 			if(employeeDesignation.compareToIgnoreCase("HRManager")==0)
 			{
 				
-				user = dbConnection.saveUser(new User(firstName, middleName, lastName, emailAddress, (Date)new SimpleDateFormat("mm/dd/yyyy").parse(dateOfBirth)
-						,userName, password, UserRoles.HR_MANAGER.getUserRoleId(), address));
+				user = dbConnection.saveUser(new User(firstName, middleName, lastName, emailAddress, (Date)new SimpleDateFormat("mm/dd/yyyy").parse(dateOfBirth),userName, password, UserRoles.HR_MANAGER.getUserRoleId(), address));
 				
 				employee= new Employee(user.getUserId(), employeeId, null, contactNumber, department);
 				employee.setDesignation("HRManager");
 			}
 			else if(employeeDesignation.compareToIgnoreCase("FactoryManager")==0)
 			{
-				user = dbConnection.saveUser(new User(firstName, middleName, lastName, emailAddress, (Date)new SimpleDateFormat("mm/dd/yyyy").parse(dateOfBirth)
-						,userName, password, UserRoles.FACTORY_MANAGER.getUserRoleId(), address));
+				user = dbConnection.saveUser(new User(firstName, middleName, lastName, emailAddress, (Date)new SimpleDateFormat("mm/dd/yyyy").parse(dateOfBirth),userName, password, UserRoles.FACTORY_MANAGER.getUserRoleId(), address));
 				employee = new Employee(user.getUserId(), employeeId, managerId, contactNumber, department);
 				employee.setDesignation("FactoryManager");
 			}
 			else{
-				user = dbConnection.saveUser(new User(firstName, middleName, lastName, emailAddress, (Date)new SimpleDateFormat("mm/dd/yyyy").parse(dateOfBirth)
-						,userName, password, UserRoles.FACTORY_EMPLOYEE.getUserRoleId(), address));
+				user = dbConnection.saveUser(new User(firstName, middleName, lastName, emailAddress, (Date)new SimpleDateFormat("mm/dd/yyyy").parse(dateOfBirth),userName, password, UserRoles.FACTORY_EMPLOYEE.getUserRoleId(), address));
 				employee = new Employee(user.getUserId(), employeeId, managerId, contactNumber, department);
 			}
 			dbConnection.saveEmployeeProfile(employee);
