@@ -209,16 +209,6 @@ insert into WorkingMachineLineStatus_tbl(lineId, employeeId, startPosition,endPo
 values(2, 'FMSM8903', 100, 231, 23, 'Working', 'Battery');
 
 
-insert into WorkingMachineLineStatus_tbl(lineId, employeeId, startPosition,endPosition, stock,  status, machineType)
-values(2, 'FMSM8903', 100, 122, 220, 'Working', 'Electronics');
-insert into WorkingMachineLineStatus_tbl(lineId, employeeId, startPosition,endPosition, stock,  status, machineType)
-values(2, 'FMSM8903', 122, 139, 90, 'Malfunction', 'Casing');
-insert into WorkingMachineLineStatus_tbl(lineId, employeeId, startPosition,endPosition, stock,  status, machineType)
-values(2, 'FMSM8903', 20, 40, 92, 'Stock Low', 'Screen');
-insert into WorkingMachineLineStatus_tbl(lineId, employeeId, startPosition,endPosition, stock,  status, machineType)
-values(2, 'FMSM8903', 100, 231, 23, 'Working', 'Battery');
-
-
 insert into ClaimStatus_tbl(claimStatus)
 values('APPLIED');
 insert into ClaimStatus_tbl(claimStatus)
