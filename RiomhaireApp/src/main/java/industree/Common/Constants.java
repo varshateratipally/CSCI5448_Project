@@ -265,8 +265,8 @@ public class Constants {
 		
 		public static enum ClaimStatus
 		{
-			PENDING (2),
 			APPLIED (1),
+			PENDING (2),		
 			APPROVED (3);
 			
 			
