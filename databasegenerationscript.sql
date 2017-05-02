@@ -156,6 +156,10 @@ values('FMSM8903', 3, 'FactoryManager', 'MANUFACTURING', '2015-09-09 00:00:00.00
 
 insert into Employee_tbl(employeeId,userId, designation,department,dateOfJoining, workContact )
 values('FESC3403', 4, 'FactoryEmployee', 'MANUFACTURING', '2015-09-09 00:00:00.00', 1234);
+<<<<<<< HEAD
+=======
+
+>>>>>>> eff5f984161851fd7260e7d96956b8d6060bfb79
 
 
 insert into MachineLineStatus_tbl(machinelineStatus)
@@ -194,6 +198,16 @@ insert into WorkingMachineLineStatus_tbl(lineId, employeeId, startPosition,endPo
 values(2, 'FESC3403', 20, 40, 92, 'Stock Low', 'Screen');
 insert into WorkingMachineLineStatus_tbl(lineId, employeeId, startPosition,endPosition, stock,  status, machineType)
 values(2, 'FESC3403', 100, 231, 23, 'Working', 'Battery');
+
+insert into WorkingMachineLineStatus_tbl(lineId, employeeId, startPosition,endPosition, stock,  status, machineType)
+values(2, 'FMSM8903', 100, 122, 220, 'Working', 'Electronics');
+insert into WorkingMachineLineStatus_tbl(lineId, employeeId, startPosition,endPosition, stock,  status, machineType)
+values(2, 'FMSM8903', 122, 139, 90, 'Malfunction', 'Casing');
+insert into WorkingMachineLineStatus_tbl(lineId, employeeId, startPosition,endPosition, stock,  status, machineType)
+values(2, 'FMSM8903', 20, 40, 92, 'Stock Low', 'Screen');
+insert into WorkingMachineLineStatus_tbl(lineId, employeeId, startPosition,endPosition, stock,  status, machineType)
+values(2, 'FMSM8903', 100, 231, 23, 'Working', 'Battery');
+
 
 insert into WorkingMachineLineStatus_tbl(lineId, employeeId, startPosition,endPosition, stock,  status, machineType)
 values(2, 'FMSM8903', 100, 122, 220, 'Working', 'Electronics');
