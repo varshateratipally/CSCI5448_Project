@@ -157,6 +157,9 @@ values('FMSM8903', 3, 'FactoryManager', 'MANUFACTURING', '2015-09-09 00:00:00.00
 insert into Employee_tbl(employeeId,userId, designation,department,dateOfJoining, workContact )
 values('FESC3403', 3, 'FactoryEmployee', 'MANUFACTURING', '2015-09-09 00:00:00.00', 1234);
 
+insert into Employee_tbl(employeeId,userId, designation,department,dateOfJoining, workContact )
+values('FEBC5183', 3, 'FactoryEmployee', 'MANUFACTURING', '2015-09-09 00:00:00.00', 1234);
+
 
 insert into MachineLineStatus_tbl(machinelineStatus)
 values('Working');
