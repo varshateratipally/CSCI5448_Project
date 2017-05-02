@@ -58,8 +58,9 @@ padding-left: 15px;
              <span style="color: white"> Stock </span>
               </div>
               <div class="col-xs-2" id="p2">
-              <img src= "<c:url value="/images/Picture1.png"/>"
-               width=100px height=100px/>
+             <img src="https://image.ibb.co/haSokk/Picture4.png" alt="Picture4" border="0" 
+              width=100px height=100px
+              />
                <br/>
                <br/>
                <textarea rows="1" id="electronicsStatustext" style="width: 100px;" readonly> ${electronicsStatus.status}</textarea>
@@ -73,9 +74,9 @@ padding-left: 15px;
                <textarea rows="1" id="electronicsStock" style="width: 100px;" readonly> ${electronicsStatus.stock}</textarea>
               </div>
               <div class="col-xs-2" id="p3">
-				<img src= "<c:url value="/images/Picture2.png"/>"
-				width=100px height=100px
-				/>
+				<img src="https://image.ibb.co/iiMsBQ/Picture2.png" alt="Picture2" border="0" 
+              width=100px height=100px
+              />
 				<br/>
                <br/>
                <textarea rows="1" id="screenStatus" style="width: 100px;" readonly> ${screenStatus.status}</textarea>
@@ -90,7 +91,7 @@ padding-left: 15px;
                
 			  </div>
               <div class="col-xs-2" id="p4">
-              <img src= "<c:url value="/images/Picture3.png"/>"
+             <img src="https://image.ibb.co/iiMsBQ/Picture3.png" alt="Picture3" border="0" 
               width=100px height=100px
               />
               <br/>
@@ -107,7 +108,7 @@ padding-left: 15px;
                
               </div>
               <div class="col-xs-2" id="p5">
-              <img src= "<c:url value="/images/Picture4.png"/>"
+              <img src="https://image.ibb.co/haSokk/Picture4.png" alt="Picture4" border="0" 
               width=100px height=100px
               />
               <br/>
