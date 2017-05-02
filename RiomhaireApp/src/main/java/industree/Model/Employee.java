@@ -8,23 +8,23 @@ import javax.persistence.*;
 @Table(name="Employee_tbl")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Employee {
-	//Column for employeeId
+	//Adding Column for employeeId
 	@Id
 	@Column(name="employeeId")
 	private String employeeId;
-	//Column for userId
+	//Adding Column for userId
 	@Column(name="userId")
 	private int userId;
-	//Column for designation
+	//Adding Column for designation
 	@Column(name="designation")
 	private String designation;
-	//Column for dateOfJoining
+	//Adding Column for dateOfJoining
 	@Column(name="dateOfJoining")
 	private Date dateOfJoining;
-	//Column for workContact
+	//Adding Column for workContact
 	@Column(name="workContact")
 	private String workContact;
-	//Column for department
+	//Adding Column for department
 	@Column(name="department")
 	private String department;
 	
